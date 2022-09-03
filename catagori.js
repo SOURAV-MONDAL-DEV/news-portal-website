@@ -31,9 +31,13 @@ function loadNews(catagoriId){
 }
 
 function showNews(newses){
+    let newsShort = newses.sort((a, b) => parseFloat(b.total_view) - parseFloat(a.total_view));
+    const newsNumberField = document.getElementById('newsNumberField')
+    newsNumberField.innerText = `${newses.length} News found for this category`
+    console.log(newsShort)
     const newsBody = document.getElementById('newsBody')
     newsBody.textContent = '';
-    newses.forEach(news => {
+    newsShort.forEach(news => {
        const newsDiv = document.createElement('div')
        newsDiv.classList.add("card")
        newsDiv.innerHTML = `
@@ -65,10 +69,10 @@ function showNews(newses){
          </div>
        </div>
      </div>
-
        `
        newsBody.appendChild(newsDiv)
-        console.log(news)
+
     });
+    // stop spinner
 }
 
