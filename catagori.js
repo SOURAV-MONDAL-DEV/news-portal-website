@@ -32,9 +32,10 @@ function loadNews(catagoriId){
 
 function showNews(newses){
     let newsShort = newses.sort((a, b) => parseFloat(b.total_view) - parseFloat(a.total_view));
+    const mainNewsSection = document.getElementById('mainNewsSection')
+    mainNewsSection.classList.remove('d-none')
     const newsNumberField = document.getElementById('newsNumberField')
     newsNumberField.innerText = `${newses.length} News found for this category`
-    console.log(newsShort)
     const newsBody = document.getElementById('newsBody')
     newsBody.textContent = '';
     newsShort.forEach(news => {
@@ -76,3 +77,14 @@ function showNews(newses){
     // stop spinner
 }
 
+
+
+
+
+const faqBtn = document.getElementById('faqBtn')
+faqBtn.addEventListener('click', function(){
+  const mainNewsSection = document.getElementById('mainNewsSection')
+  mainNewsSection.classList.add('d-none')
+  
+console.log(mainNewsSection)
+})
