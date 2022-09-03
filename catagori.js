@@ -19,6 +19,8 @@ const showcat = catagories =>{
     catLi.innerHTML = `<button  onclick="loadNews('${catagori.category_id}')" id="" class=" btn btn-light btn-sm text-decoration-none text-secondary fs-6" href="">${catName}</button>`
     catContainer.appendChild(catLi)
     }
+
+    
 }
 
 
@@ -30,6 +32,7 @@ function loadNews(catagoriId){
     .then(data => showNews(data.data))
 }
 
+
 function showNews(newses){
     let newsShort = newses.sort((a, b) => parseFloat(b.total_view) - parseFloat(a.total_view));
     const mainNewsSection = document.getElementById('mainNewsSection')
@@ -37,7 +40,12 @@ function showNews(newses){
     const faqSection = document.getElementById('faqSection')
     faqSection.textContent = '';
     const newsNumberField = document.getElementById('newsNumberField')
-    newsNumberField.innerText = `${newses.length} News found for this category`
+    if( newses.length == 0 ){
+      newsNumberField.innerText = `OPPS ! NO News found for this category`
+    }
+    else{
+      newsNumberField.innerText = `${newses.length} News found for this category`
+    }
     const newsBody = document.getElementById('newsBody')
     newsBody.textContent = '';
     newsShort.forEach(news => {
@@ -51,22 +59,22 @@ function showNews(newses){
        <div class="col-md-9 ">
          <div class="card-body m-0">
            <h5 class="fs-3 fw-bold card-title">${news.title}</h5>
-           <p class="card-text mt-3"> is a massive open online course provider, and its learning experience arranges coursework into a series of modules and lessons that can include videos, text notes and assessment tests. Our video player has functional features like closed captioning and note-taking functions. </p>
+           <p class="card-text mt-3">${news.details.slice(0, 300)}...</p>
            <div class=" row  d-flex justify-content-between mt-4 " >
              <div  class="col-md-3 d-flex align-items-center">
                <img class="rounded w-5 "  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="" srcset="">
-               <div>
-                 <h4 class="  " >${news.author?.name}</h4>
+               <div class="ps-3" >
+                 <h4 class="  " >${news.author.name == null ? 'No name found' : news.author.name.slice(0, 13)}</h4>
                  <p>12 Feb 2021</p>
                </div>
              </div>
              <div  class="col-md-3 pt-3 ">
-               <h4 class="  ">👁‍🗨 ${news.total_view}</h4>
+               <h4 class="  ">👁‍🗨 ${news.total_view == null ? 'No info' : news.total_view}</h4>
              </div>
              <div  class="col-md-3 pt-3">
                <h4 class="  ">☆☆☆☆</h4>
              </div>
-             <button class=" fs-3 col-md-1 btn btn-info btn-sm" >⇱</button>
+             <button data-bs-toggle="modal" onclick="fullNewsFunction('${news}')" class=" col-md-2 btn btn-primary h-25 mt-4 " >Full News 🡢</button>
            </div>
            
          </div>
@@ -88,10 +96,6 @@ newsBtn.addEventListener('click', function(){
     faqSection.textContent = '';
   console.log('newsbtn clik')
 })
-
-
-
-
 
 
 const faqBtn = document.getElementById('faqBtn')
@@ -145,5 +149,10 @@ faqBtn.addEventListener('click', function(){
   </div>
   `
   faqSection.appendChild(faqDiv)
-console.log(faqSection)
 })
+
+
+function fullNewsFunction(theNews){
+
+  console.log(theNews)
+}
