@@ -25,7 +25,7 @@ const showcat = catagories =>{
 }
 
 
-
+// fetch news catagory 
 function loadNews(catagoriId){
   // start loader
     toggleSpinner(true);
@@ -35,6 +35,7 @@ function loadNews(catagoriId){
     .then(data => showNews(data.data))
 }
 
+// spinner function
 const toggleSpinner = isloading => {
   const loaderSection = document.getElementById('loader');
   if(isloading){
@@ -45,6 +46,7 @@ const toggleSpinner = isloading => {
   }
 }
 
+// function for show news
 function showNews(newses){
     let newsShort = newses.sort((a, b) => parseFloat(b.total_view) - parseFloat(a.total_view));
     const mainNewsSection = document.getElementById('mainNewsSection')
@@ -74,7 +76,7 @@ function showNews(newses){
            <p class="card-text mt-3">${news.details.slice(0, 300)}...</p>
            <div class=" row  d-flex justify-content-between mt-4 " >
              <div  class="col-md-3 d-flex align-items-center">
-               <img class="rounded w-5 "  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="" srcset="">
+               <img class="rounded w-5 "  src="${news.author.img}" alt="" srcset="">
                <div class="ps-3" >
                  <h4 class="  " >${news.author.name == null ? 'No name found' : news.author.name.slice(0, 13)}</h4>
                  <p>12 Feb 2021</p>
@@ -100,7 +102,7 @@ function showNews(newses){
     toggleSpinner(false);
 }
 
-
+// creat news button
 const newsBtn = document.getElementById('newsBtn')
 newsBtn.addEventListener('click', function(){
   const mainNewsSection = document.getElementById('mainNewsSection')
@@ -110,7 +112,7 @@ newsBtn.addEventListener('click', function(){
   console.log('newsbtn clik')
 })
 
-
+// FAQ button function
 const faqBtn = document.getElementById('faqBtn')
 faqBtn.addEventListener('click', function(){
   const mainNewsSection = document.getElementById('mainNewsSection')
@@ -165,7 +167,7 @@ faqBtn.addEventListener('click', function(){
 })
 
 
-
+// News deteils
 const newsDataId = async id =>{
   const url = `https://openapi.programming-hero.com/api/news/${id}`
   const res = await fetch(url)
@@ -174,8 +176,7 @@ const newsDataId = async id =>{
 }
 
 
-
-
+// show news details
 function fullNewsFunction(theNews){
   const ModalParent = document.getElementById('ModalParent')
   ModalParent.innerHTML = '';
@@ -188,6 +189,24 @@ function fullNewsFunction(theNews){
       <h2>${theNews.title}</h2>
       <p>${theNews.details}</p>
     </div>
+
+    <div class=" row  d-flex justify-content-between mt-4 " >
+        <div  class="col-md-6 d-flex align-items-center">
+          <img class="rounded w-5 "  src="${theNews.author.img}" alt="" srcset="">
+          <div class="ps-3" >
+            <h4 class="  " >${theNews.author.name  == null ? 'No Name info' : theNews.author.name}</h4>
+            <p>${theNews.author.published_date}</p>
+          </div>
+        </div>
+        <div  class="col-md-6 pt-3 ">
+          <h4 class="  ">👁‍🗨 ${theNews.total_view == null ? 'No views info' : theNews.total_view} </h4>
+        </div> 
+    </div>
   `
   ModalParent.appendChild(newsModal)
 }
+
+
+// ${theNews.author.name == null ? 'No name found' : theNews.author.name.slice(0, 13)}
+
+// ${theNews.total_view == null ? 'No info' : thisNews.total_view}
