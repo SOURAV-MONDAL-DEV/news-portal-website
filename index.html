@@ -8,7 +8,7 @@
     <style>
       .w-5{
         width: 25% !important;
-        height: 50% !important;
+        height: auto !important;
       }
       .newsDiv{
         max-width: 1280px;
@@ -22,8 +22,8 @@
             <div class="container-fluid">
               <a class="navbar-brand fs-3 fw-bold"><span class="bg-warning p-2 rounded">Today's</span><span class="text-danger" >Trending</span> </a>
               <ul class="d-flex list-unstyled gap-4 " >
-                 <button   id="newsBtn"  class="btn btn-light fs-5" href="">News</button>
-                 <button  id="faqBtn"  class="btn btn-light fs-5" href="">FAQ</button>
+                <button id="newsBtn" class="btn btn-light fs-5 text-primary" href="">News</button>
+                <button id="faqBtn"  class="btn btn-light fs-5 text-primary" href="">FAQ</button>
               </ul>
             </div>
           </nav>
@@ -33,9 +33,9 @@
       <!-- catagories -->
       <section>
           <div id="catagori-div">
-            <ul id="catContainer" class="d-flex justify-content-center list-unstyled gap-4 " data-toggle="collapse"  >
+            <div id="catContainer" class="d-flex justify-content-center flex-wrap gap-4 " data-toggle="collapse"  >
 
-            </ul>
+            </div>
           </div>
       </section>
       <!-- FAQ -->

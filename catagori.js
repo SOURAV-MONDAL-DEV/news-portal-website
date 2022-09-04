@@ -16,6 +16,7 @@ const showcat = catagories =>{
     let catName = catagori.category_name
     let catId = catagori.category_id
     const catLi = document.createElement('div')
+    catLi.classList.add('mb-3')
     catLi.innerHTML = `<button  onclick="loadNews('${catagori.category_id}')" id="" class=" btn btn-light btn-sm text-decoration-none text-secondary fs-6" href="">${catName}</button>`
     catContainer.appendChild(catLi)
     }
@@ -61,7 +62,7 @@ function showNews(newses){
     newsBody.textContent = '';
     newsShort.forEach(news => {
        const newsDiv = document.createElement('div')
-       newsDiv.classList.add("card")
+       newsDiv.classList.add("card" , "mb-3")
        newsDiv.innerHTML = `
        <div class="row g-0">
        <div class="col-md-3">
