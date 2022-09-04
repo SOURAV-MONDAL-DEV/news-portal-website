@@ -74,7 +74,7 @@ function showNews(newses){
              <div  class="col-md-3 pt-3">
                <h4 class="  ">☆☆☆☆</h4>
              </div>
-             <button data-bs-toggle="modal" onclick="fullNewsFunction('${news}')" class=" col-md-2 btn btn-primary h-25 mt-4 " >Full News 🡢</button>
+             <button data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="newsDataId('${news._id}')" class=" col-md-2 btn btn-primary h-25 mt-4 " >Full News 🡢</button>
            </div>
            
          </div>
@@ -152,7 +152,29 @@ faqBtn.addEventListener('click', function(){
 })
 
 
-function fullNewsFunction(theNews){
 
-  console.log(theNews)
+const newsDataId = async id =>{
+  const url = `https://openapi.programming-hero.com/api/news/${id}`
+  const res = await fetch(url)
+  const data = await res.json()
+  fullNewsFunction(data.data[0])
+}
+
+
+
+
+function fullNewsFunction(theNews){
+  const ModalParent = document.getElementById('ModalParent')
+  ModalParent.innerHTML = '';
+  const newsModal = document.createElement('div');
+  newsModal.innerHTML = `
+    <div>
+      <img class="img-fluid" src="${theNews.image_url}" alt="" srcset="">
+    </div>
+    <div>
+      <h2>${theNews.title}</h2>
+      <p>${theNews.details}</p>
+    </div>
+  `
+  ModalParent.appendChild(newsModal)
 }
