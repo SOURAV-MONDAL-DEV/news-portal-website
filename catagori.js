@@ -49,6 +49,7 @@ const toggleSpinner = isloading => {
 // function for show news
 function showNews(newses){
     let newsShort = newses.sort((a, b) => parseFloat(b.total_view) - parseFloat(a.total_view));
+    console.log(newsShort)
     const mainNewsSection = document.getElementById('mainNewsSection')
     mainNewsSection.classList.remove('d-none')
     const faqSection = document.getElementById('faqSection')
